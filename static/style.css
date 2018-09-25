@@ -1,0 +1,215 @@
+.nav-item
+{
+  display: flex;
+  align-items:center;
+  padding-left: 100px;
+}
+
+.control-btns {
+  float: left
+}
+.control-btns button {
+  display: block;
+  margin: 0.4rem auto;
+  width: 100%;
+}
+.sports-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#countries-table {
+  counter-reset: countries-table;
+}
+
+#countries-table > li::before {
+  counter-increment: countries-table;
+  content: counter(countries-table);
+  margin-right: 1rem;
+  width: 2rem;
+  height: 2rem;
+  line-height: 1.9rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.list-group-item {
+  font-size: 2rem;
+}
+
+.list-group-item a {
+  text-decoration: none;
+}
+
+a img {
+  vertical-align: baseline;
+}
+
+.list-group-item .timeline {
+  display: none;
+  font-style: italic;
+  font-size: 1.5rem;
+  margin-left: 5%;
+  border: 2px solid;
+  border-radius: 2rem;
+  padding: 0 0.5rem 0;
+}
+
+.list-group-item:hover .timeline {
+  display: inline;
+}
+
+.timeline img {
+  vertical-align: sub
+}
+
+.list-group-item > div {
+  margin-top: 0.5rem;
+}
+
+.table {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.table th:last-child {
+  width: 50%;
+}
+
+.table th {
+  text-align: center;
+}
+
+.table th:nth-child(odd) {
+  width: 10%;
+}
+.table th:nth-child(2) {
+  text-align: left;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table td img {
+  display: block;
+  margin: 0 auto;
+}
+
+.table td ul {
+  width: 100%;
+}
+
+.table td ul li{
+  float: left;
+  margin-left: 1.5rem;
+  width: 40%;
+}
+
+.table td ul li:nth-child(even){
+  margin-right: 0;
+}
+
+/* TIMELINE */
+
+#flags {
+  text-align: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+#flags div {
+  width: 10%;
+}
+#switch-div > div {
+  height: 3rem;
+  text-align: center;
+}
+#switch-div #button-div {
+  width: 50%;
+  float: left;
+}
+#button-div button {
+  height: 100%;
+}
+#date-header {
+  vertical-align: bottom;
+  font-size: 1.5rem;
+  line-height: 3rem;
+}
+
+#placeholder {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* ATHLETES */
+
+.switch:nth-child(even) {
+  display: none;
+}
+
+#total-athletes {
+  width: 30%;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+tbody.switch td:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 5rem;
+}
+tbody.switch td div {
+  width: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#athletes-table th:first-child {
+  width: 40%;
+}
+#athletes-table td:first-child {
+  text-align: center;
+}
+#athletes-table th:last-child {
+  width: 50%;
+}
+.place1::before {
+  content: url("medals/1.png");
+}
+
+.place2::before {
+  content: url("medals/2.png");
+}
+
+.place3::before {
+  content: url("medals/3.png");
+}
+.place1::before, .place2::before, .place3::before{
+  margin-right: 0.4rem;
+  height: 1.2rem;
+}
+
+/* SORTING athletes and events */
+/* by DreamTeK https://stackoverflow.com/a/22156412/9728623 */
+.sorting,
+.sorting_asc,
+.sorting_desc{
+	padding:4px 21px 4px 4px;
+	cursor:pointer;
+}
+.sorting{
+	background:url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIUnC2nKLnT4or00PvyrQwrPzUZshQAOw==) no-repeat center right !important;
+}
+.sorting_asc{
+	background:url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIRnC2nKLnT4or00Puy3rx7VQAAOw==) no-repeat center right !important;
+	border-bottom:#70AADD 2px solid;
+}
+.sorting_desc{
+	background:url(data:image/gif;base64,R0lGODlhCwALAJEAAAAAAP///xUVFf///yH5BAEAAAMALAAAAAALAAsAAAIPnI+py+0/hJzz0IruwjsVADs=) no-repeat center right !important;
+	border-bottom:2px solid #b00;
+}
