@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% set active_page = "timeline" %}
+
+{% block title %}
+  Timeline
+{% endblock %}
+
+{% block main %}
+<section id="cards-area">
+  <div class="collapse multi-collapse" id="flags-container">
+    <div class="card card-body" id="flags">
+      <!-- Flag Icons by GoSquared(https://www.gosquared.com/resources/flag-icons/) -->
+        {% for country in rows %}
+        <div class="flag-div">
+          <img src="static\flags\{{ country }}.png" alt="{{country}}" class="countries" id="{{ country }}" title="{{ country }}">
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+  <div id="switch-div">
+    <div id="button-div">
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="date-container flags-container">
+        Countries / Medals
+      </button>
+    </div>
+    <div id="date-header">
+      First select a country
+    </div>
+  </div>
+  <div class="collapse multi-collapse" id="medals-container">
+    <div class="card card-body" id="medals-info">
+      Medals from a selected date will be shown here
+    </div>
+  </div>
+</section>
+<div id="container" style="width:100%; height:400px;"></div>
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="static\mustache.js" ></script>
+  <script type="text/javascript" src="static\highcharts.js" ></script>
+  <script type="text/javascript">
+    var rows = {{ rows | tojson | safe }};
+    var dates = {{ dates | tojson | safe }};
+    var query = {{ query | tojson | safe }};
+  </script>
+  {% raw %}
+  <script type="text/html" id = "medals-template">
+    <table class="table table-striped">
+      <tr>
+        <th>Medal</th>
+        <th>Event</th>
+        <th>Sport</th>
+        <th>Athletes</th>
+      </tr>
+      {{#.}}
+      <tr>
+        <td><img src="static\medals\{{ place }}.png" title="{{ place }}" alt="{{ place }}"/></td>
+        <td>{{event}}</td>
+        <td><img src="static\sports\{{ sport }}-small.png" title="{{ sport }}" alt="{{ sport }}"/></td>
+        <td>
+          <ul>
+          {{#athletes}}
+            <li>
+              {{.}}
+            </li>
+          {{/athletes}}
+          </ul>
+        </td>
+      </tr>
+      {{/.}}
+    </table>
+  </script>
+  {% endraw %}
+  <script src="static\timeline.js"></script>
+{% endblock %}

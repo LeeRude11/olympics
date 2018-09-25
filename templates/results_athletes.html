@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% set active_page = page_name %}
+
+{% block title %}
+  {{ page_name|capitalize }}
+{% endblock %}
+
+{% block main %}
+<form id="parameters-container" class="form-row align-items-center">
+  {% if page_name == "athletes" %}
+    <div class="col">
+      <select id="country" class="form-control mb-2">
+        <option value="" selected>Select country...</option>
+        {% for name in countries %}
+        <option value="{{name}}">{{name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="form-check mb-2">
+      <input type="checkbox" class="form-check-input" id="medals">
+      <label class="form-check-label" for="medals">Show only medalists</label>
+    </div>
+    {% set columns_names = ["Name", "Sport", "Placings"] -%}
+    {% else %}
+    {% set columns_names = ["Rank", "Name", "Country"] -%}
+    {% endif %}
+    <div class="col">
+      <select id="sport" class="form-control mb-2">
+        <option value="" selected>Select a sport...</option>
+        {% for name in sports %}
+        <option value="{{name}}">{{name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="col-auto">
+      <select id="an_event" class="form-control mb-2">
+        <option value="" selected>To choose an event first select a sport...</option>
+      </select>
+    </div>
+</form>
+
+<div id="total-athletes">
+  Total athletes -
+  <span class="switch">0</span>
+  <span class="switch"></span>
+</div>
+<table class="table table-striped" id="{{ page_name }}-table">
+  <thead>
+    <tr>
+      {% for name in columns_names %}
+      <th class="sorting">
+        {{ name }}
+      </th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody class="switch"></tbody>
+  <tbody class="switch"></tbody>
+</table>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="static\mustache.js" ></script>
+<script type="text/javascript">
+  var page_name = {{ page_name | tojson | safe }};
+  var sports_events = {{ sports | tojson | safe }};
+</script>
+
+  {% raw %}
+  <script type="text/html" id="athletes-template">
+  {{#.}}
+  <tr>
+    <td>{{ name }}</td>
+    <td><img src="static\sports\{{ sport }}-small.png" title="{{ sport }}" alt="{{ sport }}"/></td>
+    <td class="{{score}}">{{#results}}<div class=place{{place}}>{{place}} - {{event}}</div>{{/results}}</td>
+  </tr>
+  {{/.}}
+  </script>
+
+  <script type="text/html" id="results-template">
+  {{#.}}
+  <tr>
+    <td class="place{{place}}">{{place}}</td>
+    <td><ul>{{#athletes}}<li>{{.}}</li>{{/athletes}}</ul></td>
+    <td><img src="static\flags\{{ country }}.png" alt="{{country}}" class="countries" title="{{ country }}"></td>
+  </tr>
+  {{/.}}
+  </script>
+
+  <script type="text/html" id = "events-template">
+    {{#.}}
+      <option value='{{.}}'>{{.}}</option>
+    {{/.}}
+  </script>
+  {% endraw %}
+  <script src="static\results_athletes.js"></script>
+{% endblock %}

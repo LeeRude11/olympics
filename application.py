@@ -18,7 +18,7 @@ def index():
     for key, values in groupby(medals, key=itemgetter("country")):
         countries[key] = list(v.serialize() for v in values)
 
-    return render_template("index9.html", rows=countries, sports=sports)
+    return render_template("index.html", rows=countries, sports=sports)
 
 
 @app.route("/timeline")
@@ -39,7 +39,7 @@ def timeline():
     for key, values in groupby(medals, key=itemgetter("country")):
         countries[key] = list(v.serialize_w_date() for v in values)
 
-    return render_template("timeline1.html", rows=countries,
+    return render_template("timeline.html", rows=countries,
                            dates=dates, query=q)
 
 

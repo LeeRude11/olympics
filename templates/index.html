@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% set active_page = "index" %}
+{% block title %}
+  Main Page
+{% endblock %}
+
+{% block main %}
+<div class="control-btns">
+  <button class="btn btn-primary" type="button" value="show">
+    Expand all
+  </button>
+  <button class="btn btn-primary" type="button" value="hide">
+    Collapse all
+  </button>
+</div>
+<div class="sports-container">
+  <a href="#" class="sports">
+    <img src="static\mercy.png" />
+  </a>
+  {% for sport in sports %}
+    <a href="#" class="sports" id="{{ sport }}" title="{{ sport }}" alt="{{ sport }}">
+      <img src="static\sports\{{ sport }}.png" />
+    </a>
+  {% endfor %}
+</div>
+  <ul class="list-group list-group-flush" id="countries-table">
+  </ul>
+{% endblock %}
+{% block scripts %}
+  <script type="text/javascript" src="static\mustache.js" ></script>
+  <script type="text/javascript">
+    var rows = {{ rows | tojson | safe }};
+  </script>
+  {% raw %}
+  <script type="text/html" id = "table-template">
+    {{#.}}
+    <li class="list-group-item">
+        <a data-toggle="collapse" href="#collapse{{ country }}" role="button" aria-expanded="false" aria-controls="collapse{{ country }}">
+          <img src="static\flags-small\{{ country }}.png" alt="{{country}}" class="countries" title="{{ country }}">
+          {{ country }}
+          <img src="static\medals\1.png" / title="1st place" alt="1st place"> {{ place1 }}
+          <img src="static\medals\2.png" / title="2nd place" alt="2nd place"> {{ place2 }}
+          <img src="static\medals\3.png" / title="3rd place" alt="3rd place"> {{ place3 }}
+        </a>
+        <a class="timeline" href='/timeline?q={{ country }}'>
+          Timeline
+          <img src="static\up-right.png">
+        </a>
+      <div class="collapse" id="collapse{{ country }}">
+        <div class="card card-body">
+          <table class="table table-striped">
+            <tr>
+              <th>
+                Medal
+              </th>
+              <th>
+                Event
+              </th>
+              <th>
+                Sport
+              </th>
+              <th>
+                Athletes
+              </th>
+            </tr>
+            {{#medals}}
+            <tr>
+              <td>
+                <img src="static\medals\{{ place }}.png" title="{{ place }}" alt="{{ place }}"/>
+              </td>
+              <td>
+                {{ event }}
+              </td>
+              <td>
+                <img src="static\sports\{{ sport }}-small.png" title="{{ sport }}" alt="{{ sport }}"/>
+              </td>
+              <td>
+                <ul>
+                {{#athletes}}
+                  <li>
+                    {{.}}
+                  </li>
+                {{/athletes}}
+                </ul>
+              </td>
+            </tr>
+            {{/medals}}
+          </table>
+        </div>
+      </div>
+    </li>
+    {{/.}}
+  </script>
+  {% endraw %}
+  <script src="static\main.js"></script>
+{% endblock %}
