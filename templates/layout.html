@@ -18,17 +18,17 @@
               <img src="static/768px-PyeongChang_2018_crop.png" height="100"/>
             </li>
             {% set navigation_bar = [
-                ('/', 'index', 'Main Table'),
-                ('/timeline', 'timeline', 'Timeline'),
-                ('/results', 'results', 'Results'),
-                ('/athletes', 'athletes', 'Athletes')
+                ('index', 'Main Table'),
+                ('timeline', 'Timeline'),
+                ('results', 'Results'),
+                ('athletes', 'Athletes')
             ] -%}
-            {% for href, id, caption in navigation_bar %}
+            {% for id, caption in navigation_bar %}
               <li class="nav-item
                 {% if id == active_page %}
                 active
                 {% endif %}">
-                <a class="nav-link" href="{{ href|e }}">{{ caption|e }}</a>
+                <a class="nav-link" href="{{ url_for(id) }}">{{ caption }}</a>
               </li>
             {% endfor %}
         </ul>
