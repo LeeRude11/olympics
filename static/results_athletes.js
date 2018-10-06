@@ -50,17 +50,11 @@ function comparer(index) {
   }
 };
 
-var getCellValue = {
-  results: function(row, index) {
-    var sought_cell = $(row).children('td').eq(index)
-    return sought_cell.text() || sought_cell.find('img').prop('title')
-  },
-  athletes: function(row, index) {
+function getCellValue(row, index) {
     var sought_cell = $(row).children('td').eq(index)
     // score <td> has text and class, name has text and sport has only img
-    return sought_cell.prop('class') || sought_cell.text() || sought_cell.find('img').prop('title')
-  }
-}[page_name]
+    return sought_cell.attr('data-score') || sought_cell.text() || sought_cell.find('img').prop('title')
+};
 
 // one field is checked before AJAX request
 var requiredField = {

@@ -71,7 +71,7 @@
   <tr>
     <td>{{ name }}</td>
     <td><img src="static\sports\{{ sport }}-small.png" title="{{ sport }}" alt="{{ sport }}"/></td>
-    <td class="{{score}}">{{#results}}<div class=place{{place}}>{{place}} - {{event}}</div>{{/results}}</td>
+    <td data-score="{{score}}">{{#results}}<div class=place{{place}}>{{place}} - {{event}}</div>{{/results}}</td>
   </tr>
   {{/.}}
   </script>
